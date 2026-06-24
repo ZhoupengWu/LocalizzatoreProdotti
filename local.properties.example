@@ -1,0 +1,6 @@
+# Copia questo file in "local.properties" (NON va committato su git)
+# Ottieni una API key gratuita su https://aistudio.google.com/app/apikey
+GEMINI_API_KEY=la_tua_chiave_gemini_qui
+
+# Percorso SDK Android (Android Studio lo compila automaticamente)
+# sdk.dir=/percorso/del/tuo/Android/sdk

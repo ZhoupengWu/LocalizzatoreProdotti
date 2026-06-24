@@ -1,0 +1,26 @@
+{
+  "name": "Android Gradle Build",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": "."
+  },
+  "remoteUser": "vscode",
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "vscjava.vscode-java-pack",
+        "vscjava.vscode-gradle",
+        "redhat.java"
+      ],
+      "settings": {
+        "java.import.gradle.enabled": true,
+        "java.configuration.updateBuildConfiguration": "automatic"
+      }
+    }
+  },
+
+  // Rende eseguibile il wrapper Gradle e mostra la versione per verificare
+  // che tutto sia configurato correttamente al primo avvio del Codespace
+  "postCreateCommand": "chmod +x ./gradlew 2>/dev/null; ./gradlew --version || true"
+}
