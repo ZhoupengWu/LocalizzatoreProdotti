@@ -32,12 +32,14 @@ RUN set -eux; \
     mv "${ANDROID_SDK_ROOT}/cmdline-tools/cmdline-tools" "${ANDROID_SDK_ROOT}/cmdline-tools/latest"; \
     rm /tmp/cmdline-tools.zip
 
-# Accetta tutte le licenze e installa i componenti SDK necessari per buildare
+# Accetta le licenze e installa i componenti SDK necessari per la build.
+# Non installiamo l'emulatore: in CI/Codespaces serve solo compilare il debug APK.
 RUN yes | "${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null 2>&1 || true && \
     "${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager" \
         "platform-tools" \
         "platforms;${ANDROID_PLATFORM}" \
-        "build-tools;${ANDROID_BUILD_TOOLS}" > /dev/null
+        "build-tools;${ANDROID_BUILD_TOOLS}" \
+        "cmdline-tools;latest" > /dev/null
 
 # Rende l'SDK scrivibile dall'utente vscode (serve se Gradle deve scaricare
 # altri componenti SDK non preinstallati durante la build)

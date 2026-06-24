@@ -11,7 +11,8 @@
       "extensions": [
         "vscjava.vscode-java-pack",
         "vscjava.vscode-gradle",
-        "redhat.java"
+        "redhat.java",
+        "mathiasfrohlich.Kotlin"
       ],
       "settings": {
         "java.import.gradle.enabled": true,
@@ -20,7 +21,12 @@
     }
   },
 
-  // Rende eseguibile il wrapper Gradle e mostra la versione per verificare
-  // che tutto sia configurato correttamente al primo avvio del Codespace
-  "postCreateCommand": "chmod +x ./gradlew 2>/dev/null; ./gradlew --version || true"
+  // Secrets da configurare in Codespaces → Settings → Secrets:
+  //   GEMINI_API_KEY  →  la tua chiave gratuita da aistudio.google.com
+  //
+  // Il comando qui sotto:
+  //   1. genera local.properties con sdk.dir e la chiave Gemini (da secret o placeholder)
+  //   2. rende eseguibile gradlew
+  //   3. esegue un sync leggero per verificare la configurazione Gradle
+  "postCreateCommand": "echo \"sdk.dir=${ANDROID_HOME}\" > local.properties && echo \"GEMINI_API_KEY=${GEMINI_API_KEY:-INSERISCI_LA_TUA_CHIAVE_QUI}\" >> local.properties && chmod +x ./gradlew && ./gradlew --version"
 }
