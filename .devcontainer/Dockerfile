@@ -1,5 +1,5 @@
 # Dev Container per build di un progetto Gradle / Android
-FROM mcr.microsoft.com/devcontainers/java:1-17-bookworm
+FROM mcr.microsoft.com/devcontainers/java:1-21-bookworm
 
 # --- Parametri modificabili in base al progetto ---
 ARG ANDROID_SDK_ROOT=/opt/android-sdk
@@ -12,7 +12,8 @@ ENV ANDROID_SDK_ROOT=${ANDROID_SDK_ROOT} \
 
 USER root
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN rm -f /etc/apt/sources.list.d/yarn.list \
+    && apt-get update && apt-get install -y --no-install-recommends \
         unzip curl ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
